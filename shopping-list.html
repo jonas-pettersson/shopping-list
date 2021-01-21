@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping list example</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  </head>
+  <body>
+    <header class="w3-container w3-blue">
+      <h1>My shopping list</h1>
+    </header>
+    <section class="w3-container">
+      <div class="w3-display-container w3-cell-row w3-light-grey">
+        <div class="w3-cell">
+          <input
+            class="w3-input"
+            type="text"
+            name="item"
+            id="item"
+            placeholder="Enter a new item"
+          />
+        </div>
+        <button class="w3-button w3-green w3-display-bottomright">
+          Add item
+        </button>
+      </div>
+    </section>
+
+    <section class="w3-container w3-margin-top">
+      <ul class="w3-ul w3-card-4"></ul>
+    </section>
+    <script>
+      const ul = document.querySelector("ul");
+      const input = document.querySelector("input");
+      const addBtn = document.querySelector("button");
+
+      addBtn.addEventListener("click", addItem);
+      input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          addItem();
+        }
+      });
+
+      function addItem() {
+        var currentInput = input.value;
+        input.value = "";
+
+        const li = document.createElement("li");
+        const txtSpan = document.createElement("span");
+        const delBtnSpan = document.createElement("span");
+
+        txtSpan.textContent = currentInput;
+        delBtnSpan.textContent = "×";
+
+        li.setAttribute("class", "w3-bar w3-hover-light-grey");
+        txtSpan.setAttribute("class", "w3-bar-item");
+        delBtnSpan.setAttribute(
+          "class",
+          "w3-bar-item w3-right w3-button w3-large w3-hover-red"
+        );
+
+        delBtnSpan.addEventListener("click", () => {
+          li.remove();
+          input.focus();
+        });
+
+        li.appendChild(txtSpan);
+        li.appendChild(delBtnSpan);
+        ul.appendChild(li);
+
+        input.focus();
+      }
+    </script>
+  </body>
+</html>
